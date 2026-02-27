@@ -1,0 +1,8 @@
+python-telegram-bot==20.7
+requests
+pandas
+ta-lib
+python-dotenv
+asyncio
+aiohttp
+websockets
