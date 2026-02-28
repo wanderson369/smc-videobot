@@ -24,6 +24,7 @@ class HealthHandler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 10000))
-    server = HTTPServer(("", port), HealthHandler)
-    print(f"Health server running on port {port}")
-    server.serve_forever()
+    ```python
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 10000))
+    flask_app.run(host='0.0.0.0', port=port, debug=False)
