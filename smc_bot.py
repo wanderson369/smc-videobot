@@ -12,8 +12,8 @@ application = Application.builder().token(TOKEN).build()
 # === TEUS HANDLERS (igual teu código) ===
 async def start(update, context):
     await update.message.reply_text("SMC Bot LIVE! 🎉
-Menu:
-/start - Menu")
+
+/start:
 
 application.add_handler(CommandHandler("start", start))
 
