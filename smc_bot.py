@@ -1,16 +1,18 @@
-import asyncio
-import logging
-from telegram.ext import Application, CommandHandler
-import requests
-# ... TUDO teu SMC bot
+import os
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("🚀 SMC Bot Online!")
+class HealthHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"SMC Bot is running")
 
-def main():
-    app = Application.builder().token("8646443096:AAFJNslOlcrGSlSg8Kv8oW4X6CWODupbu1E").build()
-    app.add_handler(CommandHandler("start", start))
-    app.run_polling()
-
+# DEPOIS do application.run_polling()
 if __name__ == "__main__":
-    main()
+    # Seu bot roda aqui normalmente...
+    
+    # Health server pro Render (NÃO APAGA!)
+    port = int(os.getenv("PORT", 10000))
+    server = HTTPServer(("", port), HealthHandler)
+    print(f"Health server on port {port}")
+    server.serve_forever()
