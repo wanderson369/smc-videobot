@@ -16,3 +16,14 @@ if __name__ == "__main__":
     server = HTTPServer(("", port), HealthHandler)
     print(f"Health server on port {port}")
     server.serve_forever()
+    # TEU CÓDIGO ATUAL (mantém 100%)
+imports...
+load_dotenv()
+TOKEN = os.getenv('TOKEN')
+
+# SÓ ADICIONA ISSO AQUI 👇 (logo após TOKEN)
+WEBHOOK_URL = "https://smc-videobot.onrender.com" 
+requests.get(f"https://api.telegram.org/bot{TOKEN}/setWebhook?url={WEBHOOK_URL}")
+print("✅ Webhook configurado!")
+
+# resto do teu código IGUAL...
