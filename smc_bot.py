@@ -13,7 +13,7 @@ app = Flask(__name__)
 def webhook():
     if request.method == 'POST':
         update = Update.de_json(request.get_json(force=True), None)
-        application.process_update(update)  **← AQUI! application, NÃO bot**
+        application.process_update(update)  
     return 'OK'
 
 class HealthHandler(BaseHTTPRequestHandler):
