@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: smc-videobot
+    env: python
+    buildCommand: pip install --only-binary=all pandas numpy python-telegram-bot python-dotenv
+    startCommand: python smc_bot.py
