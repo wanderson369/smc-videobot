@@ -1,19 +1,19 @@
 import os
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from flask import Flask, request  # ← ADICIONA ISSO
+from flask import Flask, request
 from telegram import Update
-from telegram.ext import Application, CommandHandler  # ← teus imports normais
+from telegram.ext import Application, CommandHandler
 
 # ... teu código do bot todo igual (TOKEN, handlers, etc) ...
 
-# === FLASK WEBHOOK (ADICIONA ANTES do health server) ===
+# === FLASK WEBHOOK CORRIGIDO ===
 app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET', 'HEAD'])
 def webhook():
     if request.method == 'POST':
-        update = Update.de_json(request.get_json(force=True), bot)  # ← teu bot instance
-        bot.process_update(update)
+        update = Update.de_json(request.get_json(force=True), None)
+        application.process_update(update)  **← AQUI! application, NÃO bot**
     return 'OK'
 
 class HealthHandler(BaseHTTPRequestHandler):
@@ -23,7 +23,6 @@ class HealthHandler(BaseHTTPRequestHandler):
         self.wfile.write(b"Bot is running")
 
 if __name__ == "__main__":
-    # health server (mantém igual)
     port = int(os.getenv("PORT", 10000))
     server = HTTPServer(("", port), HealthHandler)
     print(f"Health server running on port {port}")
